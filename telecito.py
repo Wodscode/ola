@@ -26,7 +26,7 @@ from pymongo import MongoClient
 token = TELEGRAM_BOT_TOKEN
 
 AUTH_TOKEN = token_api
-client = MongoClient("mongodb+srv://thikhabot:h4inj4I5STCtpHF5@thikhadox.bdmbaay.mongodb.net/?retryWrites=true&w=majority")
+client = MongoClient("mongodb+srv://thikhbot:h4inj4I5STCtpHF5@thikhadox.bdmbaay.mongodb.net/?retryWrites=true&w=majority")
 db = client.keys
 customers_collection = db.customers
 
@@ -50,7 +50,7 @@ async def send_initial_message(update: Update):
         reply_markup = InlineKeyboardMarkup(keyboard)
 
         caption = (
-            f"*[#ThiKhaBot]* ➜ *COMANDOS*\n\n"
+            f"*[#PeruDox]* ➜ *COMANDOS*\n\n"
             f"*Bienvenido al menú principal de comandos*\n\n"
             f"*Este centro de comandos está dividido por secciones para su fácil manejo.*\n\n"
             f"*⬇️ Selecciona una de las opciones para visualizar su contenido ⬇️*\n\n"
@@ -68,7 +68,7 @@ async def button_click(update: Update, context: CallbackContext):
             await show_main_menu(update, context)
         if query.data == 'reniec':
             text = (
-                "*[#ThiKhaBot]* ➜ *[CMDS - RENIEC]*\n\n"
+                "*[#PeruDox]* ➜ *[CMDS - RENIEC]*\n\n"
                 "*[📍] RENIEC ONLINE - 1 FOTO [PREMIUM]*\n\n"
                 "*Estado* → Activo [🟢]\n"
                 "*Uso* → /dni 00000001\n"
@@ -95,7 +95,7 @@ async def button_click(update: Update, context: CallbackContext):
             )
         elif query.data == 'actas':
             text = (
-                "*[#ThiKhaBot]* ➜ *[CMDS - ACTAS]*\n\n"
+                "*[#PeruDox]* ➜ *[CMDS - ACTAS]*\n\n"
                 "*[📍] ACTA DE NACIMIENTO [PREMIUM]*\n\n"
                 "*Estado* → Activo [🟢]\n"
                 "*Uso* → /actna 00000001\n"
@@ -117,7 +117,7 @@ async def button_click(update: Update, context: CallbackContext):
             )
         elif query.data == 'telefonia':
             text = (
-                "*[#ThiKhaBot]* ➜ *[CMDS - TELEFONÍA]*\n\n"
+                "*[#PeruDox]* ➜ *[CMDS - TELEFONÍA]*\n\n"
                 "*[📍] BÚSQUEDA DE NÚMEROS [PREMIUM]*\n\n"
                 "*Estado* → Activo [🟢]\n"
                 "*Uso* → /tel 00000001\n"
@@ -152,7 +152,7 @@ async def button_click(update: Update, context: CallbackContext):
 
         elif query.data == 'academico':
             text = (
-                "*[#ThiKhaBot]* ➜ *[CMDS - ACADÉMICO]*\n\n"
+                "*[#PeruDox]* ➜ *[CMDS - ACADÉMICO]*\n\n"
                 "*[📍] NOTAS [PREMIUM]*\n\n"
                 "*Estado* → Activo [🟢]\n"
                 "*Uso* → /notas 00000001\n"
@@ -168,7 +168,7 @@ async def button_click(update: Update, context: CallbackContext):
             )                        
         elif query.data == 'generador':
             text = (
-                "*[#ThiKhaBot]* ➜ *[CMDS - GENERADOR]*\n\n"
+                "*[#PeruDox]* ➜ *[CMDS - GENERADOR]*\n\n"
                 "*[📍] RENIEC FICHA C4 AZUL [PREMIUM]*\n\n"
                 "*Estado* → Activo [🟢]\n"
                 "*Uso* → /c4a 00000001\n"
@@ -201,7 +201,7 @@ async def button_click(update: Update, context: CallbackContext):
                 )
         elif query.data == 'familia':
             text = (
-                "*[#ThiKhaBot]* ➜ *[CMDS - FAMILIA]*\n\n"
+                "*[#PeruDox]* ➜ *[CMDS - FAMILIA]*\n\n"
                 "*[📍] HOGAR [PREMIUM]*\n\n"
                 "*Estado* → Activo [🟢]\n"
                 "*Uso* → /hog 00000001\n"
@@ -229,7 +229,7 @@ async def button_click(update: Update, context: CallbackContext):
             )
         elif query.data == 'delitos':
             text = (
-                "*[#ThiKhaBot]* ➜ *[CMDS - DELITOS]*\n\n"
+                "*[#PeruDox]* ➜ *[CMDS - DELITOS]*\n\n"
                 "*[📍] ANTECEDENTES JUDICIALES [PREMIUM]*\n\n"
                 "*Estado* → Activo [🟢]\n"
                 "*Uso* → /antju 00000001\n"
@@ -257,7 +257,7 @@ async def button_click(update: Update, context: CallbackContext):
             )
         elif query.data == 'financiero':
             text = (
-                "*[#ThiKhaBot]* ➜ *[CMDS - FINANCIERO]*\n\n"
+                "*[#PeruDox]* ➜ *[CMDS - FINANCIERO]*\n\n"
                 "*[📍] SUELDOS [PREMIUM]*\n\n"
                 "*Estado* → Activo [🟢]\n"
                 "*Uso* → /sueldos 00000001\n"
@@ -278,7 +278,7 @@ async def button_click(update: Update, context: CallbackContext):
             )
         elif query.data == 'vehiculos':
             text = (
-                "*[#ThiKhaBot]* ➜ *[CMDS - VEHÍCULOS]*\n\n"
+                "*[#PeruDox]* ➜ *[CMDS - VEHÍCULOS]*\n\n"
                 "*[📍] SUNARP [PREMIUM]*\n\n"
                 "*Estado* → Activo [🟢]\n"
                 "*Uso* → /sunarp RM1514\n"
@@ -306,7 +306,7 @@ async def button_click(update: Update, context: CallbackContext):
             )
         elif query.data == 'extra':
             text = (
-                "*[#ThiKhaBot]* ➜ *[CMDS - EXTRA]*\n\n"
+                "*[#PeruDox]* ➜ *[CMDS - EXTRA]*\n\n"
                 "*[📍] CORREOS [PREMIUM]*\n\n"
                 "*Estado* → Activo [🟢]\n"
                 "*Uso* → /correo 00000001\n"
@@ -414,7 +414,7 @@ async def show_main_menu(update: Update, context: CallbackContext):
     reply_markup = InlineKeyboardMarkup(keyboard)
 
     caption = (
-        f"*[#ThiKhaBot]* ➜ *COMANDOS*\n\n"
+        f"*[#PeruDox]* ➜ *COMANDOS*\n\n"
         f"*Bienvenido al menú principal de comandos*\n\n"
         f"*Este centro de comandos está dividido por secciones para su fácil manejo.*\n\n"
         f"*⬇️ Selecciona una de las opciones para visualizar su contenido ⬇️*\n\n"
@@ -471,7 +471,7 @@ async def me(update: Update, context: CallbackContext):
         if end_date:
             end_date_obj = datetime.datetime.strptime(end_date, '%Y-%m-%d %H:%M:%S')     
             profile_text = (
-                f"*[#ThiKhaBot]*\n\n"
+                f"*[#PeruDox]*\n\n"
                 f"*PERFIL DE {name}:*\n\n"
                 f"*[🙎‍♂️] ID:* `{user_id}`\n"
                 f"*[🗒] NOMBRE:* `{name}`\n"
@@ -531,7 +531,7 @@ async def user_info(update: Update, context: CallbackContext):
             query = customer.get('query')
 
             mensaje = (
-                f"*[#ThiKhaBot]*\n\n"
+                f"*[#PeruDox]*\n\n"
                 f"*PERFIL DEL USUARIO {name}:*\n\n"
                 f"*[🗒] NOMBRE:* `{name}`\n"
                 f"*[⚡️] USER:* [{user_rec_username}](tg://user?id={user_id})\n"
@@ -1114,7 +1114,7 @@ async def reniecCompleto(update: Update, context):
         if result['success']:
 
             caption = (
-                f"*[#ThiKhaBot]* ➜ *RENIEC LVL 2*\n\n"
+                f"*[#PeruDox]* ➜ *RENIEC LVL 2*\n\n"
                 f"*DNI:* `{result['nuDni'] + ' - ' + result['digitoVerificacion']}`\n"
                 f"*NOMBRE:* `{result['nombre']}`\n"
                 f"*APELLIDOS:* `{result['ape_paterno'] + ' ' + result['ape_materno']}`\n"
@@ -1197,7 +1197,7 @@ async def reniecBasico(update: Update, context):
         if result['success']:
 
             caption = (
-                f"*[#ThiKhaBot]* ➜ *RENIEC LVL 1*\n\n"
+                f"*[#PeruDox]* ➜ *RENIEC LVL 1*\n\n"
                 f"*DNI:* `{result['nuDni'] + ' - ' + result['digitoVerificacion']}`\n"
                 f"*NOMBRE:* `{result['nombre']}`\n"
                 f"*APELLIDOS:* `{result['ape_paterno'] + ' ' + result['ape_materno']}`\n"
@@ -1264,7 +1264,7 @@ async def dniBasico(update: Update, context):
         if result['success']:
             data = result['data']
             caption = (
-                f"*[#ThiKhaBot]* ➜ *DNI BÁSICO*\n\n"
+                f"*[#PeruDox]* ➜ *DNI BÁSICO*\n\n"
                 f"*DNI:* `{data['nuDni']}`\n"
                 f"*Nombre:* `{data['preNombres']}`\n"
                 f"*Apellido Paterno:* `{data['apePaterno']}`\n"
@@ -1320,7 +1320,7 @@ async def nombre(update: Update, context):
 
             for persona in personas:
                 mensaje = (
-                    f"*[#ThiKhaBot]* ➜ *CONSULTA POR NOMBRE*\n\n"
+                    f"*[#PeruDox]* ➜ *CONSULTA POR NOMBRE*\n\n"
                     f"*DNI:* `{persona.get('nuDni', '')}`\n"
                     f"*Nombres:* `{persona.get('preNombres', '')} {persona.get('apePaterno', '')} {persona.get('apeMaterno', '')}`\n"
                     f"*Sexo:* `{persona.get('sexo', '')}`\n"
@@ -1372,7 +1372,7 @@ async def hogar(update: Update, context):
             integrantes = data.get('integrantes', [])
 
             caption = (
-                f"*[#ThiKhaBot]* ➜ *HOGAR*\n\n"
+                f"*[#PeruDox]* ➜ *HOGAR*\n\n"
                 f"*Hogar ID:* `{identificacion.get('hogarID', '')}`\n"
                 f"*Estado:* `{identificacion.get('hogarEstado', '')}`\n"
                 f"*Fecha Empadronamiento:* `{identificacion.get('fechaEmpadronamiento', '')}`\n\n"
@@ -1447,7 +1447,7 @@ async def predios(update: Update, context):
         if result['success']:
             data = result['data']
             caption = (
-                f"*[#ThiKhaBot]* ➜ *PREDIOS*\n\n"
+                f"*[#PeruDox]* ➜ *PREDIOS*\n\n"
                 f"*DNI:* `{data['numeroDocumento']}`\n"
                 f"*Nombre:* `{data['nombres']}`\n"
                 f"*Apellido Paterno:* `{data['apPaterno']}`\n"
@@ -1501,7 +1501,7 @@ async def tel(update: Update, context):
                 data = result['data']
                 numbers = data['numbers']
                 caption = (
-                    f"*[#ThiKhaBot]* ➜ *TELÉFONOS*\n\n"
+                    f"*[#PeruDox]* ➜ *TELÉFONOS*\n\n"
                     f"*DNI:* `{data['dni']}`\n"
                     f"*Titular:* `{data['name'] +' '+ data['surname']}`\n\n"
                     
@@ -1558,7 +1558,7 @@ async def familiares(update: Update, context: CallbackContext):
         if resultado['success']:
             familiares = resultado['familiares']
             mensaje = (
-                f"*[#ThiKhaBot]* ➜ *FAMILIARES*\n\n"
+                f"*[#PeruDox]* ➜ *FAMILIARES*\n\n"
             )
             for familiar in familiares:
                 mensaje += (
@@ -1611,7 +1611,7 @@ async def arbol(update: Update, context: CallbackContext):
 
         if resultado['success']:
             familiares = resultado['familiares']
-            mensaje = "*[#ThiKhaBot]* ➜ *ÁRBOL GENEALÓGICO*\n\n"  # Inicializar la variable mensaje
+            mensaje = "*[#PeruDox]* ➜ *ÁRBOL GENEALÓGICO*\n\n"  # Inicializar la variable mensaje
             for familiar in familiares:
                 mensaje += (
                     f"**DNI:** `{familiar['nuDni'] + '-' + familiar['digitoVerificacion']}`\n"
@@ -1663,7 +1663,7 @@ async def hermanos(update: Update, context: CallbackContext):
 
         if resultado['success']:
             hermanos = resultado['hermanos']
-            mensaje = "*[#ThiKhaBot]* ➜ *HERMANOS*\n\n"  # Inicializar la variable mensaje
+            mensaje = "*[#PeruDox]* ➜ *HERMANOS*\n\n"  # Inicializar la variable mensaje
             for hermano in hermanos:
                 mensaje += (
                     f"**DNI:** `{hermano['nuDni'] + '-' + hermano['digitoVerificacion']}`\n"
@@ -1711,7 +1711,7 @@ async def bitel(update: Update, context: CallbackContext):
 
         if resultado['success']:
             bitel_info = resultado['bitel']
-            mensaje = "*[#ThiKhaBot]* ➜ *BITEL*\n\n"  # Inicializar la variable mensaje
+            mensaje = "*[#PeruDox]* ➜ *BITEL*\n\n"  # Inicializar la variable mensaje
             for info in bitel_info:
                 mensaje += (
                     f"**Número:** `{info['number']}`\n"
@@ -1757,7 +1757,7 @@ async def claro(update: Update, context: CallbackContext):
 
         if resultado['success']:
             claro_info = resultado['claro']
-            mensaje = "*[#ThiKhaBot]* ➜ *CLARO*\n\n"  # Inicializar la variable mensaje
+            mensaje = "*[#PeruDox]* ➜ *CLARO*\n\n"  # Inicializar la variable mensaje
             for info in claro_info:
                 mensaje += (
                     f"**Celular:** `{info['celular']}`\n"
@@ -1810,7 +1810,7 @@ async def placas(update: Update, context: CallbackContext):
 
         if resultado['success']:
             placa_info = resultado['placa']
-            mensaje = "*[#ThiKhaBot]* ➜ *INFORMACIÓN DE PLACA*\n\n"  # Inicializar la variable mensaje
+            mensaje = "*[#PeruDox]* ➜ *INFORMACIÓN DE PLACA*\n\n"  # Inicializar la variable mensaje
             mensaje += (
                 f"**Número de Placa:** `{placa_info['numPlaca']}`\n"
                 f"**Número de Partida:** `{placa_info['numPartida']}`\n"
@@ -1893,7 +1893,7 @@ async def sunarp(update: Update, context: CallbackContext):
 
         if resultado['success']:
             caption = (
-                f"*[#ThiKhaBot]* ➜ *SUNARP*\n\n"
+                f"*[#PeruDox]* ➜ *SUNARP*\n\n"
                 f"*Sunarp generada satisfactoriamente*\n"
             )
             foto_bytes = resultado['foto_bytes']
@@ -1938,7 +1938,7 @@ async def correo(update: Update, context: CallbackContext):
 
         if resultado['success']:
             correos_info = resultado['correos']
-            mensaje = "*[#ThiKhaBot]* ➜ *CORREOS*\n\n"  # Inicializar la variable mensaje
+            mensaje = "*[#PeruDox]* ➜ *CORREOS*\n\n"  # Inicializar la variable mensaje
             for correo in correos_info:
                 mensaje += (
                     f"*DNI:* `{correo['dni']}`\n"
@@ -1986,7 +1986,7 @@ async def sueldos(update: Update, context: CallbackContext):
 
         if resultado['success']:
             sueldos_info = resultado['sueldos']
-            mensaje = "*[#ThiKhaBot]* ➜ *SUELDOS*\n\n"  # Inicializar la variable mensaje
+            mensaje = "*[#PeruDox]* ➜ *SUELDOS*\n\n"  # Inicializar la variable mensaje
             for sueldo in sueldos_info:
                 mensaje += (
                     f"*DNI:* `{sueldo['nuDni']}`\n"
@@ -2037,7 +2037,7 @@ async def sbs(update: Update, context: CallbackContext):
 
         if resultado['success']:
             sbs_info = resultado['sbs_info']
-            mensaje = "*[#ThiKhaBot]* ➜ *SBS*\n\n"  # Inicializar la variable mensaje
+            mensaje = "*[#PeruDox]* ➜ *SBS*\n\n"  # Inicializar la variable mensaje
             for info in sbs_info:
                 mensaje += (
                     f"*Entidad:* `{info['entidad']}`\n"
@@ -2083,7 +2083,7 @@ async def geo(update: Update, context: CallbackContext):
 
         if resultado['success']:
             geo_info = resultado['geo_info']
-            mensaje = "*[#ThiKhaBot]* ➜ *GEOLOCALIZACIÓN*\n\n"  # Inicializar la variable mensaje
+            mensaje = "*[#PeruDox]* ➜ *GEOLOCALIZACIÓN*\n\n"  # Inicializar la variable mensaje
             mensaje += (
                 f"*IP:* `{geo_info['ip']}`\n"
                 f"*Operador:* `{geo_info['operator']}`\n"
@@ -2136,7 +2136,7 @@ async def ruc(update: Update, context: CallbackContext):
                 await update.message.reply_text(mensaje, parse_mode='Markdown')
                 return
             
-            mensaje_inicial = "*[#ThiKhaBot]* ➜ *ESTABLECIMIENTOS ASOCIADOS*\n\n"
+            mensaje_inicial = "*[#PeruDox]* ➜ *ESTABLECIMIENTOS ASOCIADOS*\n\n"
             mensajes = [mensaje_inicial]
             mensaje_actual = mensaje_inicial
 
@@ -2275,7 +2275,7 @@ async def dniv(update: Update, context: CallbackContext):
         if resultado['success']:
             # Prepare the document caption with detailed description
             document_caption = (
-                f"*[#ThiKhaBot]* ➜ *DNI VIRTUAL*\n\n"
+                f"*[#PeruDox]* ➜ *DNI VIRTUAL*\n\n"
                 f"*Número de DNI:* `{dni}`\n"
                 f"*Edad:* `{resultado['listaAni']['nuEdad']}`\n"
                 f"*Nombre Completo:* `{resultado['listaAni']['preNombres']} {resultado['listaAni']['apePaterno']} {resultado['listaAni']['apeMaterno']}`\n"
@@ -2331,7 +2331,7 @@ async def dnie(update: Update, context: CallbackContext):
         if resultado['success']:
             # Prepare the document caption with detailed description
             document_caption = (
-                f"*[#ThiKhaBot]* ➜ *DNI ELECTRÓNICO*\n\n"
+                f"*[#PeruDox]* ➜ *DNI ELECTRÓNICO*\n\n"
                 f"*Número de DNI:* `{dni}`\n"
                 f"*Edad:* `{resultado['listaAni']['nuEdad']}`\n"
                 f"*Nombre Completo:* `{resultado['listaAni']['preNombres']} {resultado['listaAni']['apePaterno']} {resultado['listaAni']['apeMaterno']}`\n"
@@ -2388,7 +2388,7 @@ async def antjud(update: Update, context: CallbackContext):
         if resultado['success']:
             # Prepare the document caption with detailed description
             document_caption = (
-                f"*[#ThiKhaBot]* ➜ *ANTECEDENTES JUDICIALES*\n\n"
+                f"*[#PeruDox]* ➜ *ANTECEDENTES JUDICIALES*\n\n"
                 f"*DNI:* `{dni}`\n"
                 f"*NOMBRE:* {resultado['listaAni']['preNombres']} {resultado['listaAni']['apePaterno']} {resultado['listaAni']['apeMaterno']}\n"
                 f"*Fecha de Nacimiento:* {resultado['listaAni']['feNacimiento']}\n\n"
@@ -2440,7 +2440,7 @@ async def antpol(update: Update, context: CallbackContext):
         if resultado['success']:
             # Prepare the document caption with detailed description
             document_caption = (
-                f"*[#ThiKhaBot]* ➜ *ANTECEDENTES POLICIALES*\n\n"
+                f"*[#PeruDox]* ➜ *ANTECEDENTES POLICIALES*\n\n"
                 f"*DNI:* `{dni}`\n"
                 f"*NOMBRE:* {resultado['listaAni']['preNombres']} {resultado['listaAni']['apePaterno']} {resultado['listaAni']['apeMaterno']}\n"
                 f"*Fecha de Nacimiento:* {resultado['listaAni']['feNacimiento']}\n\n"
@@ -2492,7 +2492,7 @@ async def antpen(update: Update, context: CallbackContext):
         if resultado['success']:
             # Prepare the document caption with detailed description
             document_caption = (
-                f"*[#ThiKhaBot]* ➜ *ANTECEDENTES PENALES*\n\n"
+                f"*[#PeruDox]* ➜ *ANTECEDENTES PENALES*\n\n"
                 f"*DNI:* `{dni}`\n"
                 f"*NOMBRE:* {resultado['listaAni']['preNombres']} {resultado['listaAni']['apePaterno']} {resultado['listaAni']['apeMaterno']}\n"
                 f"*Fecha de Nacimiento:* {resultado['listaAni']['feNacimiento']}\n\n"
@@ -2544,7 +2544,7 @@ async def c4a(update: Update, context: CallbackContext):
         if resultado['success']:
             # Prepare the document caption with detailed description
             document_caption = (
-                f"*[#ThiKhaBot]* ➜ *C4 AZUL*\n\n"
+                f"*[#PeruDox]* ➜ *C4 AZUL*\n\n"
                 f"*DNI:* `{dni}`\n"
                 f"*NOMBRE:* {resultado['listaAni']['preNombres']} {resultado['listaAni']['apePaterno']} {resultado['listaAni']['apeMaterno']}\n"
                 f"*Fecha de Nacimiento:* {resultado['listaAni']['feNacimiento']}\n\n"
@@ -2596,7 +2596,7 @@ async def c4b(update: Update, context: CallbackContext):
         if resultado['success']:
             # Prepare the document caption with detailed description
             document_caption = (
-                f"*[#ThiKhaBot]* ➜ *C4 BLANCO*\n\n"
+                f"*[#PeruDox]* ➜ *C4 BLANCO*\n\n"
                 f"*DNI:* `{dni}`\n"
                 f"*NOMBRE:* {resultado['listaAni']['preNombres']} {resultado['listaAni']['apePaterno']} {resultado['listaAni']['apeMaterno']}\n"
                 f"*Fecha de Nacimiento:* {resultado['listaAni']['feNacimiento']}\n\n"
@@ -2648,7 +2648,7 @@ async def c4i(update: Update, context: CallbackContext):
         if resultado['success']:
             # Prepare the document caption with detailed description
             document_caption = (
-                f"*[#ThiKhaBot]* ➜ *C4 BLANCO*\n\n"
+                f"*[#PeruDox]* ➜ *C4 BLANCO*\n\n"
                 f"*DNI:* `{dni}`\n"
                 f"*NOMBRE:* {resultado['listaAni']['preNombres']} {resultado['listaAni']['apePaterno']} {resultado['listaAni']['apeMaterno']}\n"
                 f"*Fecha de Nacimiento:* {resultado['listaAni']['feNacimiento']}\n\n"
@@ -2701,7 +2701,7 @@ async def migr(update: Update, context: CallbackContext):
             movimientos = data.get('movimiento', [])
             
             mensaje = (
-                f"*[#ThiKhaBot]* ➜ *INFORMACIÓN DE MIGRACIONES*\n\n"
+                f"*[#PeruDox]* ➜ *INFORMACIÓN DE MIGRACIONES*\n\n"
                 f"*DNI:* `{persona.get('nuDni', '')}`\n"
                 f"*Nombre:* `{persona.get('preNombres', '')}`\n"
                 f"*Apellido Paterno:* `{persona.get('apePaterno', '')}`\n"
@@ -2762,7 +2762,7 @@ async def mininter(update: Update, context: CallbackContext):
 
         if resultado['status']:
             mensaje = (
-                f"*[#ThiKhaBot]* ➜ *INFORMACIÓN MININTER*\n\n"
+                f"*[#PeruDox]* ➜ *INFORMACIÓN MININTER*\n\n"
                 f"*DNI:* `{resultado.get('nuDni', '')}`\n"
                 f"*Nombre:* `{resultado.get('preNomres', '')}`\n"
                 f"*Apellido Paterno:* `{resultado.get('apePaterno', '')}`\n"
@@ -2810,7 +2810,7 @@ async def carnetx(update: Update, context: CallbackContext):
 
         if resultado['nombres']:
             mensaje = (
-                f"*[#ThiKhaBot]* ➜ *CARNET DE EXTRANJERÍA*\n\n"
+                f"*[#PeruDox]* ➜ *CARNET DE EXTRANJERÍA*\n\n"
                 f"*Nombres:* `{resultado.get('nombres', '')}`\n"
                 f"*Primer Apellido:* `{resultado.get('primerApellido', '')}`\n"
                 f"*Segundo Apellido:* `{resultado.get('segundoApellido', '')}`\n"
@@ -2858,7 +2858,7 @@ async def mpfn(update: Update, context: CallbackContext):
 
         if resultado['casos'] or resultado['libre']:
             mensaje = (
-                f"*[#ThiKhaBot]* ➜ *INFORMACIÓN DEL MPFN*\n\n"
+                f"*[#PeruDox]* ➜ *INFORMACIÓN DEL MPFN*\n\n"
             )
             if resultado['casos']:
                 mensaje += "*Casos:*\n"
@@ -2920,7 +2920,7 @@ async def movistar(update: Update, context: CallbackContext):
 
         if resultado:
             mensaje = (
-                f"*[#ThiKhaBot]* ➜ *INFORMACIÓN DE MOVISTAR*\n\n"
+                f"*[#PeruDox]* ➜ *INFORMACIÓN DE MOVISTAR*\n\n"
             )
 
             for info in resultado:
@@ -2976,7 +2976,7 @@ async def bolivia(update: Update, context: CallbackContext):
             nacimiento = resultado.get('nacimiento', {})
 
             mensaje = (
-                f"*[#ThiKhaBot]* ➜ *INFORMACIÓN DE BOLIVIA*\n\n"
+                f"*[#PeruDox]* ➜ *INFORMACIÓN DE BOLIVIA*\n\n"
                 f"*Estado Persona:* `{persona.get('estadoPersona', '')}`\n"
                 f"*Sexo:* `{persona.get('sexo', '')}`\n"
                 f"*Tipo de Documento:* `{persona.get('tipoDoc', '')}`\n"
@@ -3050,7 +3050,7 @@ async def sentinel(update: Update, context: CallbackContext):
             
             # Mostrar información adicional del usuario
             mensaje = (
-                f"*[#ThiKhaBot]* ➜ *INFORMACIÓN SENTINEL*\n\n"
+                f"*[#PeruDox]* ➜ *INFORMACIÓN SENTINEL*\n\n"
                 f"*DNI:* `{lista_ani.get('nuDni', '')}`\n"
                 # f"*Apellido Paterno:* `{lista_ani.get('apePaterno', '')}`\n"
                 # f"*Apellido Materno:* `{lista_ani.get('apeMaterno', '')}`\n"
@@ -3110,7 +3110,7 @@ async def boleta(update: Update, context: CallbackContext):
             # Mostrar información adicional de la boleta informativa
             if data:
                 mensaje = (
-                    f"*[#ThiKhaBot]* ➜ *BOLETA INFORMATIVA*\n\n"
+                    f"*[#PeruDox]* ➜ *BOLETA INFORMATIVA*\n\n"
                 )
                 for item in data:
                     mensaje += (
@@ -3182,7 +3182,7 @@ async def acta_nacimiento(update: Update, context: CallbackContext):
 
             # Mostrar información adicional del acta de nacimiento
             mensaje = (
-                f"*[#ThiKhaBot]* ➜ *ACTA DE NACIMIENTO*\n\n"
+                f"*[#PeruDox]* ➜ *ACTA DE NACIMIENTO*\n\n"
                 f"*DNI:* `{data.get('nuDni', '')}`\n"
                 f"*Nombres:* `{data.get('preNombres', '')} {data.get('apePaterno', '')} {data.get('apeMaterno', '')}`\n"
                 f"*Fecha de Evento:* `{data.get('feEvento', '')}`\n"
@@ -3253,7 +3253,7 @@ async def acta_matrimonio(update: Update, context: CallbackContext):
 
             # Mostrar información adicional del acta de matrimonio
             mensaje = (
-                f"*[#ThiKhaBot]* ➜ *ACTA DE MATRIMONIO*\n\n"
+                f"*[#PeruDox]* ➜ *ACTA DE MATRIMONIO*\n\n"
                 f"*DNI:* `{data.get('nuDni', '')}`\n"
                 f"*Apellido Paterno:* `{data.get('apePaterno', '')}`\n"
                 f"*Apellido Materno:* `{data.get('apeMaterno', '')}`\n"
@@ -3326,7 +3326,7 @@ async def acta_defuncion(update: Update, context: CallbackContext):
 
             # Mostrar información adicional del acta de defunción
             mensaje = (
-                f"*[#ThiKhaBot]* ➜ *ACTA DE DEFUNCIÓN*\n\n"
+                f"*[#PeruDox]* ➜ *ACTA DE DEFUNCIÓN*\n\n"
                 f"*DNI:* `{data.get('nuDni', '')}`\n"
                 f"*Apellido Paterno:* `{data.get('apePaterno', '')}`\n"
                 f"*Apellido Materno:* `{data.get('apeMaterno', '')}`\n"
@@ -3456,7 +3456,7 @@ async def notas(update: Update, context: CallbackContext):
 
         # Mostrar información adicional del estudiante
         mensaje = (
-            f"*[#ThiKhaBot]* ➜ *NOTAS*\n\n"
+            f"*[#PeruDox]* ➜ *NOTAS*\n\n"
             f"*DNI:* `{col_info.get('numDocumento', '')}`\n"
             f"*Nombre del Padre:* `{col_info.get('nomPadre', '')}`\n"
             f"*Nombre de la Madre:* `{col_info.get('nomMadre', '')}`\n"
@@ -3536,7 +3536,7 @@ async def licencia(update: Update, context: CallbackContext):
 
             # Mostrar información general del usuario
             mensaje = (
-                f"*[#ThiKhaBot]* ➜ *LICENCIA MTC*\n\n"
+                f"*[#PeruDox]* ➜ *LICENCIA MTC*\n\n"
                 f"*DNI:* `{lista_ani.get('nuDni', '')}`\n"
                 f"*Nombres:* `{lista_ani.get('preNombres', '')} {lista_ani.get('apePaterno', '')} {lista_ani.get('apeMaterno', '')}`\n"
                 f"*Tipo de Documento:* `{lista_ani.get('tipoDocumento', '')}`\n"
