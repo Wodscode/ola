@@ -457,7 +457,7 @@ async def me(update: Update, context: CallbackContext):
     
     # Buscar el usuario en la base de datos por su user_id
     customer = customers_collection.find_one({'telegram_id': user_id})
-    user_rec_username = update.effective_user.username if update.effective_user.username else "Sin username"
+    user_rec_username = user.username if user.username else "Sin username"
 
     if customer:
         role = customer.get('role')
@@ -468,24 +468,27 @@ async def me(update: Update, context: CallbackContext):
         joined_date = customer.get('join_date')
         end_date = customer.get('end_date')
         query = customer.get('query')
+        profile_text = (
+            f"*[#PeruDox]*\n\n"
+            f"*PERFIL DE {name}:*\n\n"
+            f"*[🙎‍♂️] ID:* `{user_id}`\n"
+            f"*[🗒] NOMBRE:* `{name}`\n"
+            f"*[⚡️] USER:* [{user_rec_username}](tg://user?id={user_id})\n"
+            f"*[〽️] ROL:* `{role}`\n"
+            f"*[📈] PLAN:* `{plan}`\n"
+            f"*[💰] CRÉDITOS:* `{credits}`\n"
+            f"*[👺] ESTADO:* `{status}`\n"
+            f"*[⏱] ANTI-SPAM:* `{antispam}`\n"
+            f"*[⏱] CONSULTAS:* `{query}`\n"
+            f"*[📅] UNIDO:* `{joined_date}`\n"
+        )
         if end_date:
-            end_date_obj = datetime.datetime.strptime(end_date, '%Y-%m-%d %H:%M:%S')     
-            profile_text = (
-                f"*[#PeruDox]*\n\n"
-                f"*PERFIL DE {name}:*\n\n"
-                f"*[🙎‍♂️] ID:* `{user_id}`\n"
-                f"*[🗒] NOMBRE:* `{name}`\n"
-                f"*[⚡️] USER:* [{user_rec_username}](tg://user?id={user_id})\n"
-                f"*[〽️] ROL:* `{role}`\n"
-                f"*[📈] PLAN:* `{plan}`\n"
-                f"*[💰] CRÉDITOS:* `{credits}`\n"
-                f"*[👺] ESTADO:* `{status}`\n"
-                f"*[⏱] ANTI-SPAM:* `{antispam}'`\n"
-                f"*[⏱] CONSULTAS:* `{query}`\n"
-                f"*[📅] UNIDO:* `{joined_date}`\n"
-                )
-            if end_date_obj > datetime.datetime.now():
-                profile_text += f"*[💥] FIN MEMBRESIA:* `{end_date}`\n"
+            try:
+                end_date_obj = datetime.datetime.strptime(end_date, '%Y-%m-%d %H:%M:%S')
+                if end_date_obj > datetime.datetime.now():
+                    profile_text += f"*[💥] FIN MEMBRESIA:* `{end_date}`\n"
+            except ValueError:
+                profile_text += f"*[💥] FIN MEMBRESIA:* `Fecha inválida: {end_date}`\n"
     else:
         profile_text = "No se encontraron datos para tu perfil."
 
@@ -493,32 +496,35 @@ async def me(update: Update, context: CallbackContext):
     await update.message.reply_text(profile_text, parse_mode='Markdown')
 
 async def user_info(update: Update, context: CallbackContext):
-    
     user_adm_id = update.effective_user.id
     customer = customers_collection.find_one({'telegram_id': user_adm_id})
+    
     if not customer or customer['role'] not in ['OWNER', 'SELLER']:
         return
-     
+
     try:
         args = context.args
         if len(args) != 1:
             await update.message.reply_text("Uso incorrecto del comando. Ejemplo: /user {id}")
             return
-        
+
         user_id_str = args[0]
         if not user_id_str.isdigit():
             await update.message.reply_text("El ID debe ser un número entero.")
             return
-        
+
         user_id = int(user_id_str)
 
         # Obtener datos del usuario desde la base de datos
         customer = customers_collection.find_one({'telegram_id': user_id})
+        user_rec_username = "Sin username"
+        
         try:
             chat_member = await context.bot.get_chat_member(chat_id=user_id, user_id=user_id)
             user_rec_username = chat_member.user.username if chat_member.user.username else "Sin username"
-        except Exception as e:
+        except Exception:
             pass
+
         if customer:
             name = customer.get('name', 'Sin nombre')
             role = customer.get('role')
@@ -543,10 +549,14 @@ async def user_info(update: Update, context: CallbackContext):
                 f"*[⏱] CONSULTAS:* `{query}`\n"
                 f"*[📅] UNIDO:* `{joined_date}`\n"
             )
+
             if end_date:
-                end_date_obj = datetime.datetime.strptime(end_date, '%Y-%m-%d %H:%M:%S') 
-                if end_date_obj > datetime.datetime.now():
-                    mensaje += f"*[💥] FIN MEMBRESIA:* `{end_date}`\n"
+                try:
+                    end_date_obj = datetime.datetime.strptime(end_date, '%Y-%m-%d %H:%M:%S')
+                    if end_date_obj > datetime.datetime.now():
+                        mensaje += f"*[💥] FIN MEMBRESIA:* `{end_date}`\n"
+                except ValueError:
+                    mensaje += f"*[💥] FIN MEMBRESIA:* `Fecha inválida: {end_date}`\n"
 
             await update.message.reply_text(mensaje, parse_mode='Markdown')
         else:
@@ -556,7 +566,7 @@ async def user_info(update: Update, context: CallbackContext):
         await update.message.reply_text("El ID debe ser un número entero.")
     except Exception as e:
         await update.message.reply_text(f"Error al obtener información del usuario: {str(e)}")
-
+        
 def enviar_mensaje_telegram(mensaje):
     token_control = '7438314120:AAELmuyCEZ0LK_DOPrYFNXZV6T82oxXIG7g'  # Reemplaza con el token de tu bot
     chat_id = '-4214470486'
@@ -1098,7 +1108,7 @@ async def reniecCompleto(update: Update, context):
         if not suficientes:
             await update.message.reply_text("No tienes créditos suficientes para usar este comando. Pulsa /buy para comprar.")
             return
-
+    dni = message_text.strip()
     message_text = update.message.text
     if message_text.startswith('/dnif'):
         message_text = message_text[len('/dnif'):].strip() 
@@ -1185,13 +1195,14 @@ async def reniecBasico(update: Update, context):
     message_text = update.message.text
     if message_text.startswith('/dni'):
         message_text = message_text[len('/dni'):].strip() 
-
+    
+    dni = message_text.strip()
+    
     if not dni.isdigit() or len(dni) != 8:
         await update.message.reply_text("Por favor proporciona un DNI válido de 8 dígitos.")
         return
     
     try:
-        dni = message_text.strip()
         result = consultar_reniec_una_foto(dni)
         
         if result['success']:
@@ -1354,14 +1365,12 @@ async def hogar(update: Update, context):
     message_text = update.message.text
     if message_text.startswith('/hog'):
         message_text = message_text[len('/hog'):].strip()
-
+    dni = message_text.strip()
     if not dni.isdigit() or len(dni) != 8:
         await update.message.reply_text("Por favor proporciona un DNI válido de 8 dígitos.")
         return
     
     try:
-        dni = message_text.strip()
-
         result = consultaHogar(dni)
 
         if result['success']:
@@ -1434,14 +1443,12 @@ async def predios(update: Update, context):
     message_text = update.message.text
     if message_text.startswith('/pred'):
         message_text = message_text[len('/pred'):].strip() 
-
+    dni = message_text.strip()
     if not dni.isdigit() or len(dni) != 8:
         await update.message.reply_text("Por favor proporciona un DNI válido de 8 dígitos.")
         return
     
     try:
-        dni = message_text.strip()
-
         result = consultar_predios(dni)
 
         if result['success']:
@@ -1493,7 +1500,7 @@ async def tel(update: Update, context):
     message_text = update.message.text
     if message_text.startswith('/tel'):
         dni = message_text[len('/tel'):].strip()
-
+        
         try:
             result = consultar_numeros(dni)
 
