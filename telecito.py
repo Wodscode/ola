@@ -26,7 +26,7 @@ from pymongo import MongoClient
 token = TELEGRAM_BOT_TOKEN
 
 AUTH_TOKEN = token_api
-client = MongoClient("mongodb+srv://thikhbot:h4inj4I5STCtpHF5@thikhadox.bdmbaay.mongodb.net/?retryWrites=true&w=majority")
+client = MongoClient("mongodb+srv://thikhabot:h4inj4I5STCtpHF5@thikhadox.bdmbaay.mongodb.net/?retryWrites=true&w=majority")
 db = client.keys
 customers_collection = db.customers
 
