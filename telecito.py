@@ -1108,11 +1108,14 @@ async def reniecCompleto(update: Update, context):
         if not suficientes:
             await update.message.reply_text("No tienes créditos suficientes para usar este comando. Pulsa /buy para comprar.")
             return
-    dni = message_text.strip()
+
+    # Extraer el DNI del mensaje
     message_text = update.message.text
     if message_text.startswith('/dnif'):
-        message_text = message_text[len('/dnif'):].strip() 
-        
+        dni = message_text[len('/dnif'):].strip() 
+    else:
+        dni = message_text.strip()
+
     if not dni.isdigit() or len(dni) != 8:
         await update.message.reply_text("Por favor proporciona un DNI válido de 8 dígitos.")
         return
@@ -1192,11 +1195,13 @@ async def reniecBasico(update: Update, context):
             await update.message.reply_text("No tienes créditos suficientes para usar este comando. Pulsa /buy para comprar.")
             return
 
+
+    # Extraer el DNI del mensaje
     message_text = update.message.text
     if message_text.startswith('/dni'):
-        message_text = message_text[len('/dni'):].strip() 
-    
-    dni = message_text.strip()
+        dni = message_text[len('/dni'):].strip() 
+    else:
+        dni = message_text.strip()
     
     if not dni.isdigit() or len(dni) != 8:
         await update.message.reply_text("Por favor proporciona un DNI válido de 8 dígitos.")
@@ -1254,14 +1259,18 @@ async def reniecBasico(update: Update, context):
         await update.message.reply_text(f"Ha ocurrido un error")
 
 async def dniBasico(update: Update, context): 
-    message_text = update.message.text
     user_id = update.effective_user.id
     if not await antepam(update, context):
         return
     await update_last_query_time(user_id)
 
+
+    # Extraer el DNI del mensaje
+    message_text = update.message.text
     if message_text.startswith('/dnix'):
-        message_text = message_text[len('/dnix'):].strip() 
+        dni = message_text[len('/dnix'):].strip() 
+    else:
+        dni = message_text.strip()
 
     if not dni.isdigit() or len(dni) != 8:
         await update.message.reply_text("Por favor proporciona un DNI válido de 8 dígitos.")
@@ -1362,10 +1371,13 @@ async def hogar(update: Update, context):
             await update.message.reply_text("No tienes créditos suficientes para usar este comando. Pulsa /buy para comprar.")
             return
 
+    # Extraer el DNI del mensaje
     message_text = update.message.text
-    if message_text.startswith('/hog'):
-        message_text = message_text[len('/hog'):].strip()
-    dni = message_text.strip()
+    if message_text.startswith('/hogar'):
+        dni = message_text[len('/hogar'):].strip() 
+    else:
+        dni = message_text.strip()
+
     if not dni.isdigit() or len(dni) != 8:
         await update.message.reply_text("Por favor proporciona un DNI válido de 8 dígitos.")
         return
@@ -1496,41 +1508,43 @@ async def tel(update: Update, context):
         if not suficientes:
             await update.message.reply_text("No tienes créditos suficientes para usar este comando. Pulsa /buy para comprar.")
             return
-
+    # Extraer el DNI del mensaje
     message_text = update.message.text
     if message_text.startswith('/tel'):
-        dni = message_text[len('/tel'):].strip()
-        
-        try:
-            result = consultar_numeros(dni)
+        dni = message_text[len('/tel'):].strip() 
+    else:
+        dni = message_text.strip()
 
-            if result['success']:
-                data = result['data']
-                numbers = data['numbers']
-                caption = (
-                    f"*[#PeruDox]* ➜ *TELÉFONOS*\n\n"
-                    f"*DNI:* `{data['dni']}`\n"
-                    f"*Titular:* `{data['name'] +' '+ data['surname']}`\n\n"
-                    
+    try:
+        result = consultar_numeros(dni)
+
+        if result['success']:
+            data = result['data']
+            numbers = data['numbers']
+            caption = (
+                f"*[#PeruDox]* ➜ *TELÉFONOS*\n\n"
+                f"*DNI:* `{data['dni']}`\n"
+                f"*Titular:* `{data['name'] +' '+ data['surname']}`\n\n"
+                
+            )
+
+            for number in numbers:
+                caption += (
+                    f"*NÚMERO:* `{number['number']}`\n"
+                    f"*OPERADOR:* `{number['operator']}`\n"
+                    f"*PLAN:* `{number['plan']}`\n\n"
                 )
+            await consumo_creditos(update, context, user_id, creditos)
+            await increment_queries(user_id)
+            await update.message.reply_text(caption, parse_mode='Markdown')
 
-                for number in numbers:
-                    caption += (
-                        f"*NÚMERO:* `{number['number']}`\n"
-                        f"*OPERADOR:* `{number['operator']}`\n"
-                        f"*PLAN:* `{number['plan']}`\n\n"
-                    )
-                await consumo_creditos(update, context, user_id, creditos)
-                await increment_queries(user_id)
-                await update.message.reply_text(caption, parse_mode='Markdown')
+        else:
+            await update.message.reply_text(f"Error al consultar:")
 
-            else:
-                await update.message.reply_text(f"Error al consultar:")
-
-        except ValueError:
-            await update.message.reply_text("Por favor proporciona un DNI o número después del comando. Ejemplo: /tel 12345678.")
-        except Exception as e:
-            await update.message.reply_text(f"Ha ocurrido un error")
+    except ValueError:
+        await update.message.reply_text("Por favor proporciona un DNI o número después del comando. Ejemplo: /tel 12345678.")
+    except Exception as e:
+        await update.message.reply_text(f"Ha ocurrido un error")
 
 async def familiares(update: Update, context: CallbackContext):
     user_id = update.effective_user.id
@@ -1548,9 +1562,12 @@ async def familiares(update: Update, context: CallbackContext):
             await update.message.reply_text("No tienes créditos suficientes para usar este comando. Pulsa /buy para comprar.")
             return
 
+    # Extraer el DNI del mensaje
     message_text = update.message.text
-    dni = message_text[len('/fam'):].strip()
-
+    if message_text.startswith('/fam'):
+        dni = message_text[len('/fam'):].strip() 
+    else:
+        dni = message_text.strip()
     if not dni.isdigit() or len(dni) != 8:
         await update.message.reply_text("Por favor proporciona un DNI válido de 8 dígitos.")
         return
@@ -1601,9 +1618,13 @@ async def arbol(update: Update, context: CallbackContext):
         if not suficientes:
             await update.message.reply_text("No tienes créditos suficientes para usar este comando. Pulsa /buy para comprar.")
             return
-
+    
+    # Extraer el DNI del mensaje
     message_text = update.message.text
-    dni = message_text[len('/arbol'):].strip()
+    if message_text.startswith('/arb'):
+        dni = message_text[len('/arb'):].strip() 
+    else:
+        dni = message_text.strip()
 
     if not dni.isdigit() or len(dni) != 8:
         await update.message.reply_text("Por favor proporciona un DNI válido de 8 dígitos.")
@@ -1654,8 +1675,12 @@ async def hermanos(update: Update, context: CallbackContext):
             await update.message.reply_text("No tienes créditos suficientes para usar este comando. Pulsa /buy para comprar.")
             return
 
+    # Extraer el DNI del mensaje
     message_text = update.message.text
-    dni = message_text[len('/herm'):].strip()
+    if message_text.startswith('/herm'):
+        dni = message_text[len('/herm'):].strip() 
+    else:
+        dni = message_text.strip()
 
     if not dni.isdigit() or len(dni) != 8:
         await update.message.reply_text("Por favor proporciona un DNI válido de 8 dígitos.")
@@ -1706,8 +1731,12 @@ async def bitel(update: Update, context: CallbackContext):
             await update.message.reply_text("No tienes créditos suficientes para usar este comando. Pulsa /buy para comprar.")
             return
 
+    # Extraer el DNI del mensaje
     message_text = update.message.text
-    dni = message_text[len('/bitel'):].strip()
+    if message_text.startswith('/bitel'):
+        dni = message_text[len('/bitel'):].strip() 
+    else:
+        dni = message_text.strip()
 
     if not dni:
         await update.message.reply_text("Por favor proporciona un DNI después del comando. Ejemplo: /bitel 12345678")
@@ -1752,8 +1781,12 @@ async def claro(update: Update, context: CallbackContext):
             await update.message.reply_text("No tienes créditos suficientes para usar este comando. Pulsa /buy para comprar.")
             return
 
+    # Extraer el DNI del mensaje
     message_text = update.message.text
-    dni = message_text[len('/claro'):].strip()
+    if message_text.startswith('/claro'):
+        dni = message_text[len('/claro'):].strip() 
+    else:
+        dni = message_text.strip()
 
     if not dni:
         await update.message.reply_text("Por favor proporciona un DNI después del comando. Ejemplo: /claro 12345678")
@@ -1801,8 +1834,12 @@ async def placas(update: Update, context: CallbackContext):
             await update.message.reply_text("No tienes créditos suficientes para usar este comando. Pulsa /buy para comprar.")
             return
 
+    # Extraer el DNI del mensaje
     message_text = update.message.text
-    dni = message_text[len('/placas'):].strip()
+    if message_text.startswith('/placas'):
+        dni = message_text[len('/placas'):].strip() 
+    else:
+        dni = message_text.strip()
 
     if len(dni) != 6:
         await update.message.reply_text("Por favor proporciona una placa válida.")
@@ -1884,8 +1921,12 @@ async def sunarp(update: Update, context: CallbackContext):
             await update.message.reply_text("No tienes créditos suficientes para usar este comando. Pulsa /buy para comprar.")
             return
 
+    # Extraer el DNI del mensaje
     message_text = update.message.text
-    dni = message_text[len('/sunarp'):].strip()
+    if message_text.startswith('/sunarp'):
+        dni = message_text[len('/sunarp'):].strip() 
+    else:
+        dni = message_text.strip()
 
     if len(dni) != 6:
         await update.message.reply_text("Por favor proporciona una placa válida.")
@@ -1929,8 +1970,12 @@ async def correo(update: Update, context: CallbackContext):
             await update.message.reply_text("No tienes créditos suficientes para usar este comando. Pulsa /buy para comprar.")
             return
 
+    # Extraer el DNI del mensaje
     message_text = update.message.text
-    dni = message_text[len('/correo'):].strip()
+    if message_text.startswith('/correo'):
+        dni = message_text[len('/correo'):].strip() 
+    else:
+        dni = message_text.strip()
 
     if not dni.isdigit() or len(dni) != 8:
         await update.message.reply_text("Por favor proporciona un DNI válido de 8 dígitos.")
@@ -1977,8 +2022,12 @@ async def sueldos(update: Update, context: CallbackContext):
             await update.message.reply_text("No tienes créditos suficientes para usar este comando. Pulsa /buy para comprar.")
             return
 
+    # Extraer el DNI del mensaje
     message_text = update.message.text
-    dni = message_text[len('/sueldos'):].strip()
+    if message_text.startswith('/sueldos'):
+        dni = message_text[len('/sueldos'):].strip() 
+    else:
+        dni = message_text.strip()
 
     if not dni.isdigit() or len(dni) != 8:
         await update.message.reply_text("Por favor proporciona un DNI válido de 8 dígitos.")
@@ -2028,8 +2077,12 @@ async def sbs(update: Update, context: CallbackContext):
             await update.message.reply_text("No tienes créditos suficientes para usar este comando. Pulsa /buy para comprar.")
             return
 
+    # Extraer el DNI del mensaje
     message_text = update.message.text
-    dni = message_text[len('/sbs'):].strip()
+    if message_text.startswith('/sbs'):
+        dni = message_text[len('/sbs'):].strip() 
+    else:
+        dni = message_text.strip()
 
     if not dni.isdigit() or len(dni) != 8:
         await update.message.reply_text("Por favor proporciona un DNI válido de 8 dígitos.")
@@ -2078,8 +2131,12 @@ async def geo(update: Update, context: CallbackContext):
             await update.message.reply_text("No tienes créditos suficientes para usar este comando. Pulsa /buy para comprar.")
             return
 
+    # Extraer el DNI del mensaje
     message_text = update.message.text
-    ip = message_text[len('/geo'):].strip()
+    if message_text.startswith('/ip'):
+        ip = message_text[len('/ip'):].strip() 
+    else:
+        ip = message_text.strip()
 
     if not ip:
         await update.message.reply_text("Por favor proporciona una IP después del comando. Ejemplo: /geo 138.197.126.79")
@@ -2124,8 +2181,12 @@ async def ruc(update: Update, context: CallbackContext):
             await update.message.reply_text("No tienes créditos suficientes para usar este comando. Pulsa /buy para comprar.")
             return
 
+    # Extraer el DNI del mensaje
     message_text = update.message.text
-    ruc_number = message_text[len('/ruc'):].strip()
+    if message_text.startswith('/ruc'):
+        ruc_number = message_text[len('/ruc'):].strip() 
+    else:
+        ruc_number = message_text.strip()
 
     if not ruc_number:
         await update.message.reply_text("Por favor proporciona un número de RUC después del comando. Ejemplo: /ruc 20486484013")
@@ -2191,8 +2252,12 @@ async def sunedu(update: Update, context: CallbackContext):
             await update.message.reply_text("No tienes créditos suficientes para usar este comando. Pulsa /buy para comprar.")
             return
 
+    # Extraer el DNI del mensaje
     message_text = update.message.text
-    dni = message_text[len('/sunedu'):].strip()
+    if message_text.startswith('/sunedu'):
+        dni = message_text[len('/sunedu'):].strip() 
+    else:
+        dni = message_text.strip()
 
     if not dni.isdigit() or len(dni) != 8:
         await update.message.reply_text("Por favor proporciona un DNI válido de 8 dígitos.")
@@ -2218,13 +2283,19 @@ async def sunedu(update: Update, context: CallbackContext):
         await update.message.reply_text(f"Ha ocurrido un error")
 
 async def telefonox(update: Update, context: CallbackContext):
-    message_text = update.message.text
+
     user_id = update.effective_user.id
     if not await antepam(update, context):
         return
     await update_last_query_time(user_id)
-
-    dni = message_text[len('/telx'):].strip()
+   
+    # Extraer el DNI del mensaje
+    message_text = update.message.text
+    if message_text.startswith('/telx'):
+        dni = message_text[len('/telx'):].strip() 
+    else:
+        dni = message_text.strip()
+    
 
     if not dni.isdigit() or len(dni) != 8:
         await update.message.reply_text("Por favor proporciona un DNI válido de 8 dígitos.")
@@ -2265,7 +2336,10 @@ async def dniv(update: Update, context: CallbackContext):
             return
 
     message_text = update.message.text
-    dni = message_text[len('/dniv'):].strip()
+    if message_text.startswith('/dniv'):
+        dni = message_text[len('/dniv'):].strip() 
+    else:
+        dni = message_text.strip()
 
     if not dni.isdigit() or len(dni) != 8:
         await update.message.reply_text("Por favor proporciona un DNI válido de 8 dígitos.")
@@ -2321,7 +2395,10 @@ async def dnie(update: Update, context: CallbackContext):
             return
 
     message_text = update.message.text
-    dni = message_text[len('/dnie'):].strip()
+    if message_text.startswith('/dnie'):
+        dni = message_text[len('/dnie'):].strip() 
+    else:
+        dni = message_text.strip()
 
     if not dni.isdigit() or len(dni) != 8:
         await update.message.reply_text("Por favor proporciona un DNI válido de 8 dígitos.")
@@ -2378,7 +2455,10 @@ async def antjud(update: Update, context: CallbackContext):
             return
 
     message_text = update.message.text
-    dni = message_text[len('/antju'):].strip()
+    if message_text.startswith('/antju'):
+        dni = message_text[len('/antju'):].strip() 
+    else:
+        dni = message_text.strip()
 
     if not dni.isdigit() or len(dni) != 8:
         await update.message.reply_text("Por favor proporciona un DNI válido de 8 dígitos.")
@@ -2430,7 +2510,10 @@ async def antpol(update: Update, context: CallbackContext):
             return
 
     message_text = update.message.text
-    dni = message_text[len('/antpo'):].strip()
+    if message_text.startswith('/antpo'):
+        dni = message_text[len('/antpo'):].strip() 
+    else:
+        dni = message_text.strip()
 
     if not dni.isdigit() or len(dni) != 8:
         await update.message.reply_text("Por favor proporciona un DNI válido de 8 dígitos.")
@@ -2482,7 +2565,10 @@ async def antpen(update: Update, context: CallbackContext):
             return
 
     message_text = update.message.text
-    dni = message_text[len('/antpe'):].strip()
+    if message_text.startswith('/antpe'):
+        dni = message_text[len('/antpe'):].strip() 
+    else:
+        dni = message_text.strip()
 
     if not dni.isdigit() or len(dni) != 8:
         await update.message.reply_text("Por favor proporciona un DNI válido de 8 dígitos.")
@@ -2526,7 +2612,7 @@ async def c4a(update: Update, context: CallbackContext):
     if await verificar_mensualidad_activa(user_id):
         creditos = 0
     else:
-        creditos = 15
+        creditos = 5
         suficientes = verificar_creditos_suficientes(user_id, creditos)
 
         if not suficientes:
@@ -2534,7 +2620,10 @@ async def c4a(update: Update, context: CallbackContext):
             return
 
     message_text = update.message.text
-    dni = message_text[len('/c4a'):].strip()
+    if message_text.startswith('/c4a'):
+        dni = message_text[len('/c4a'):].strip() 
+    else:
+        dni = message_text.strip()
 
     if not dni.isdigit() or len(dni) != 8:
         await update.message.reply_text("Por favor proporciona un DNI válido de 8 dígitos.")
@@ -2578,7 +2667,7 @@ async def c4b(update: Update, context: CallbackContext):
     if await verificar_mensualidad_activa(user_id):
         creditos = 0
     else:
-        creditos = 15
+        creditos = 5
         suficientes = verificar_creditos_suficientes(user_id, creditos)
 
         if not suficientes:
@@ -2630,7 +2719,7 @@ async def c4i(update: Update, context: CallbackContext):
     if await verificar_mensualidad_activa(user_id):
         creditos = 0
     else:
-        creditos = 15
+        creditos = 5
         suficientes = verificar_creditos_suficientes(user_id, creditos)
 
         if not suficientes:
@@ -3655,4 +3744,4 @@ if __name__ == '__main__':
     app.add_handler(CommandHandler('notas', notas))
     app.add_handler(CommandHandler('licen', licencia))
     print('Bot iniciado')
-    app.run_polling(poll_interval=1, timeout=30.0)
+    app.run_polling(poll_interval=1, timeout=40.0)
