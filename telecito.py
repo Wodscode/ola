@@ -30,6 +30,29 @@ client = MongoClient("mongodb+srv://thikhabot:h4inj4I5STCtpHF5@thikhadox.bdmbaay
 db = client.keys
 customers_collection = db.customers
 
+async def start(update: Update, context: ContextTypes):
+    user_id = update.effective_user.id
+    user = update.effective_user
+    name = user.first_name
+    caption = (
+        f"*[#PeruDox]* ➜ *DNI BÁSICO*\n\n"
+        f"[📍] *Bienvenido {name}*\n"
+        f"[💻] [{name}](tg://user?id={user_id}) - {user_id} \n\n"
+
+        f"[📝] Para registrarte usa → /register\n"
+        f"[⚙️] Para ver comandos usa → /cmds\n"
+        f"[🙎‍♂️] Para ver tu perfil usa → /me\n"
+
+    )
+    photo_path = 'doxperubot.jpg'
+    
+    await context.bot.send_photo(
+        chat_id=update.message.chat_id, 
+        photo=open(photo_path, 'rb'), 
+        caption=caption, 
+        parse_mode='Markdown'
+    )
+
 async def send_initial_message(update: Update):
     try:
         chat_id = update.effective_chat.id
@@ -3679,14 +3702,45 @@ async def licencia(update: Update, context: CallbackContext):
     except Exception as e:
         await update.message.reply_text(f"Ha ocurrido un error al realizar la consulta de licencia.")
 
-async def start(update: Update, context: ContextTypes):
-    await update.message.reply_text("Iniciando bot")
+async def buy(update: Update, context: ContextTypes):
+    caption = (
+        f"*_Bienvenido a los Precios de PeruDox [🇵🇪]_*\n\n"
+        f"*_LOS PRECIOS DE LOS CRÉDITOS SON LOS SIGUIENTES:_*\n\n"
+        f"*_📍 40 CRÉDITOS + 20 ➜ 10 SOLES ➜ BÁSICO_*\n"
+        f"*_📍 60 CRÉDITOS + 20 ➜ 15 SOLES ➜ BÁSICO_*\n"
+        f"*_📍 90 CRÉDITOS + 30 ➜ 20 SOLES ➜ ESTANDAR_*\n"
+        f"*_📍 210 CRÉDITOS + 50 ➜ 25 SOLES ➜ ESTANDAR_*\n"
+        f"*_📍 250 CRÉDITOS + 50 ➜ 30 SOLES ➜ ESTANDAR_*\n"
+        f"*_📍 480 CRÉDITOS + 100 ➜ 40 SOLES ➜ PREMIUM_*\n"
+        f"*_📍 660 CRÉDITOS + 120 ➜ 50 SOLES ➜ PREMIUM_*\n"
+        f"*_📍 860 CRÉDITOS + 160 ➜ 60 SOLES ➜ PREMIUM_*\n"
+        f"*_📍 1K CRÉDITOS + 550 ➜ 70 SOLES ➜ PREMIUM_*\n\n"  
+
+        f"*[🧿] VIP ILIMITADO*\n\n"   
+
+        f"*_📍 VIP 07 DÍAS ➜ 25 SOLES ➜ BÁSICO_*\n"
+        f"*_📍 VIP 15 DÍAS ➜ 40 SOLES ➜ PREMIUM_*\n"
+        f"*_📍 VIP 30 DÍAS ➜ 80 SOLES ➜ PREMIUM_*\n"
+        f"*_📍 VIP 60 DÍAS ➜ 150 SOLES ➜ PREMIUM_*\n"
+        f"*_📍 VIP 90 DÍAS ➜ 200 SOLES ➜ PREMIUM_*\n\n"
+
+        f"*[🕒] ANTI-SPAM*\n\n"   
+
+        f"*_• BÁSICO = 30'_*\n"
+        f"*_• ESTANDAR = 15'_*\n"
+        f"*_• PREMIUM = 10'_*\n\n"
+
+
+        f"*_🎭 SELLERS OFICIALES 🎭_*\n"
+    )
+    await context.bot.send_message(chat_id=update.message.chat_id, text=caption, parse_mode='Markdown')
 
 if __name__ == '__main__':
     print('Iniciando bot...')
     app = Application.builder().token(token).build()
     app.add_handler(CommandHandler('start', start))
     app.add_handler(CommandHandler('register', register))
+    app.add_handler(CommandHandler('buy', buy))
 
     app.add_handler(CommandHandler('add_cred', add_cred))
     app.add_handler(CommandHandler('more_cred', more_cred))
@@ -3744,4 +3798,4 @@ if __name__ == '__main__':
     app.add_handler(CommandHandler('notas', notas))
     app.add_handler(CommandHandler('licen', licencia))
     print('Bot iniciado')
-    app.run_polling(poll_interval=1, timeout=40.0)
+    app.run_polling(poll_interval=1, timeout=30.0)
