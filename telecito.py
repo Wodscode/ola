@@ -35,23 +35,38 @@ async def start(update: Update, context: ContextTypes):
     user = update.effective_user
     name = user.first_name
     caption = (
-        f"*[#PeruDox]* ➜ *DNI BÁSICO*\n\n"
-        f"[📍] *Bienvenido {name}*\n"
-        f"[💻] [{name}](tg://user?id={user_id}) - {user_id} \n\n"
+        f"*[#PeruDox]*\n\n"
+        f"[[📍]] *Bienvenido `{name}`*\n"
+        f"[[💻]] [{name}](tg://user?id={user_id}) - {user_id} \n\n"
 
-        f"[📝] Para registrarte usa → /register\n"
-        f"[⚙️] Para ver comandos usa → /cmds\n"
-        f"[🙎‍♂️] Para ver tu perfil usa → /me\n"
+        f"[[📝]] Para registrarte usa → /register\n"
+        f"[[⚙️]] Para ver comandos usa → /cmds\n"
+        f"[[🙎‍♂️]] Para ver tu perfil usa → /me\n"
 
     )
     photo_path = 'doxperubot.jpg'
-    
+
+    # Crear los botones inline
+    button_cmds = InlineKeyboardButton(text="Registarse", callback_data='/register')
+    button_profile = InlineKeyboardButton(text="Comandos", callback_data='/cmds')
+    keyboard = InlineKeyboardMarkup([[button_cmds, button_profile]])
+
     await context.bot.send_photo(
         chat_id=update.message.chat_id, 
         photo=open(photo_path, 'rb'), 
         caption=caption, 
-        parse_mode='Markdown'
+        parse_mode='Markdown',
+        reply_markup=keyboard
     )
+# async def button_start(update: Update, context: ContextTypes):
+#     query = update.callback_query
+#     await query.answer()
+    
+#     # Aquí defines las acciones a realizar cuando se presionan los botones
+#     if query.data == '/register':
+#         await context.bot.send_message(chat_id=update.effective_chat.id)
+#     elif query.data == '/cmds':
+#         await context.bot.send_message(chat_id=update.effective_chat.id)
 
 async def send_initial_message(update: Update):
     try:
@@ -469,7 +484,7 @@ async def register(update: Update, context: CallbackContext):
     if result.get("message") == "Customer registered successfully":
         await update.message.reply_text(f"¡Registro exitoso! Tu ID de usuario es: {user_id} y tienes 5 créditos.")
     elif result.get("message") == "Customer already registered":
-        await update.message.reply_text(f"Ya estás registrado. Tu ID de usuario es: {user_id}.")
+        await update.message.reply_text(f"Ya te encuentras registrado. Tu ID de usuario es: {user_id}.")
     else:
         await update.message.reply_text("Hubo un problema al registrar tu usuario. Por favor, intenta de nuevo más tarde.")
 
@@ -515,8 +530,15 @@ async def me(update: Update, context: CallbackContext):
     else:
         profile_text = "No se encontraron datos para tu perfil."
 
-    # Envía la respuesta al usuario
-    await update.message.reply_text(profile_text, parse_mode='Markdown')
+    photo_path = 'perudoxbot.jpg'  # Asegúrate de que la ruta sea correcta
+
+    # Envía la imagen junto con la descripción del perfil
+    await context.bot.send_photo(
+        chat_id=update.message.chat_id, 
+        photo=open(photo_path, 'rb'), 
+        caption=profile_text, 
+        parse_mode='Markdown'
+    )
 
 async def user_info(update: Update, context: CallbackContext):
     user_adm_id = update.effective_user.id
@@ -3704,34 +3726,34 @@ async def licencia(update: Update, context: CallbackContext):
 
 async def buy(update: Update, context: ContextTypes):
     caption = (
-        f"*_Bienvenido a los Precios de PeruDox [🇵🇪]_*\n\n"
-        f"*_LOS PRECIOS DE LOS CRÉDITOS SON LOS SIGUIENTES:_*\n\n"
-        f"*_📍 40 CRÉDITOS + 20 ➜ 10 SOLES ➜ BÁSICO_*\n"
-        f"*_📍 60 CRÉDITOS + 20 ➜ 15 SOLES ➜ BÁSICO_*\n"
-        f"*_📍 90 CRÉDITOS + 30 ➜ 20 SOLES ➜ ESTANDAR_*\n"
-        f"*_📍 210 CRÉDITOS + 50 ➜ 25 SOLES ➜ ESTANDAR_*\n"
-        f"*_📍 250 CRÉDITOS + 50 ➜ 30 SOLES ➜ ESTANDAR_*\n"
-        f"*_📍 480 CRÉDITOS + 100 ➜ 40 SOLES ➜ PREMIUM_*\n"
-        f"*_📍 660 CRÉDITOS + 120 ➜ 50 SOLES ➜ PREMIUM_*\n"
-        f"*_📍 860 CRÉDITOS + 160 ➜ 60 SOLES ➜ PREMIUM_*\n"
-        f"*_📍 1K CRÉDITOS + 550 ➜ 70 SOLES ➜ PREMIUM_*\n\n"  
+        f"*__Bienvenido a los Precios de PeruDox [🇵🇪]__*\n\n"
+        f"*__LOS PRECIOS DE LOS CRÉDITOS SON LOS SIGUIENTES:__*\n\n"
+        f"*__📍 40 CRÉDITOS + 20 ➜ 10 SOLES ➜ BÁSICO__*\n"
+        f"*__📍 60 CRÉDITOS + 20 ➜ 15 SOLES ➜ BÁSICO__*\n"
+        f"*__📍 90 CRÉDITOS + 30 ➜ 20 SOLES ➜ ESTANDAR__*\n"
+        f"*__📍 210 CRÉDITOS + 50 ➜ 25 SOLES ➜ ESTANDAR__*\n"
+        f"*__📍 250 CRÉDITOS + 50 ➜ 30 SOLES ➜ ESTANDAR__*\n"
+        f"*__📍 480 CRÉDITOS + 100 ➜ 40 SOLES ➜ PREMIUM__*\n"
+        f"*__📍 660 CRÉDITOS + 120 ➜ 50 SOLES ➜ PREMIUM__*\n"
+        f"*__📍 860 CRÉDITOS + 160 ➜ 60 SOLES ➜ PREMIUM__*\n"
+        f"*__📍 1K CRÉDITOS + 550 ➜ 70 SOLES ➜ PREMIUM__*\n\n"  
 
         f"*[🧿] VIP ILIMITADO*\n\n"   
 
-        f"*_📍 VIP 07 DÍAS ➜ 25 SOLES ➜ BÁSICO_*\n"
-        f"*_📍 VIP 15 DÍAS ➜ 40 SOLES ➜ PREMIUM_*\n"
-        f"*_📍 VIP 30 DÍAS ➜ 80 SOLES ➜ PREMIUM_*\n"
-        f"*_📍 VIP 60 DÍAS ➜ 150 SOLES ➜ PREMIUM_*\n"
-        f"*_📍 VIP 90 DÍAS ➜ 200 SOLES ➜ PREMIUM_*\n\n"
+        f"*__📍 VIP 07 DÍAS ➜ 25 SOLES ➜ BÁSICO__*\n"
+        f"*__📍 VIP 15 DÍAS ➜ 40 SOLES ➜ PREMIUM__*\n"
+        f"*__📍 VIP 30 DÍAS ➜ 80 SOLES ➜ PREMIUM__*\n"
+        f"*__📍 VIP 60 DÍAS ➜ 150 SOLES ➜ PREMIUM__*\n"
+        f"*__📍 VIP 90 DÍAS ➜ 200 SOLES ➜ PREMIUM__*\n\n"
 
         f"*[🕒] ANTI-SPAM*\n\n"   
 
-        f"*_• BÁSICO = 30'_*\n"
-        f"*_• ESTANDAR = 15'_*\n"
-        f"*_• PREMIUM = 10'_*\n\n"
+        f"*__• BÁSICO = 30'__*\n"
+        f"*__• ESTANDAR = 15'__*\n"
+        f"*__• PREMIUM = 10'__*\n\n"
 
 
-        f"*_🎭 SELLERS OFICIALES 🎭_*\n"
+        f"*__🎭 SELLERS OFICIALES 🎭__*\n"
     )
     await context.bot.send_message(chat_id=update.message.chat_id, text=caption, parse_mode='Markdown')
 
@@ -3798,4 +3820,4 @@ if __name__ == '__main__':
     app.add_handler(CommandHandler('notas', notas))
     app.add_handler(CommandHandler('licen', licencia))
     print('Bot iniciado')
-    app.run_polling(poll_interval=1, timeout=30.0)
+    app.run_polling(poll_interval=1, timeout=40.0)
