@@ -548,7 +548,7 @@ def consultar_sunedu(dni):
         data = response.json()
         
         if data and isinstance(data, list):
-            mensaje = "*[#ThiKhaBot]* ➜ *INFORMACIÓN ACADÉMICA SUNEDU*\n\n"
+            mensaje = "*[#PeruDox]* ➜ *INFORMACIÓN ACADÉMICA SUNEDU*\n\n"
             for info in data:
                 mensaje += (
                     f"*Nombres:* `{info['nombres']}`\n"
@@ -594,7 +594,7 @@ def verificar_numeros(dni):
         data = response.json()
         
         if data and isinstance(data, list):
-            mensaje = "*[#ThiKhaBot]* ➜ *VERIFICACIÓN DE NÚMEROS TELEFÓNICOS*\n\n"
+            mensaje = "*[#PeruDox]* ➜ *VERIFICACIÓN DE NÚMEROS TELEFÓNICOS*\n\n"
             for info in data:
                 mensaje += (
                     f"*Número:* `{info['number']}****`\n"
