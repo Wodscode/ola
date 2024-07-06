@@ -47,16 +47,16 @@ async def start(update: Update, context: ContextTypes):
     photo_path = 'doxperubot.jpg'
 
     # Crear los botones inline
-    button_cmds = InlineKeyboardButton(text="Registarse", callback_data='/register')
-    button_profile = InlineKeyboardButton(text="Comandos", callback_data='/cmds')
-    keyboard = InlineKeyboardMarkup([[button_cmds, button_profile]])
+    # button_cmds = InlineKeyboardButton(text="Registarse", callback_data='/register')
+    # button_profile = InlineKeyboardButton(text="Comandos", callback_data='/cmds')
+    # keyboard = InlineKeyboardMarkup([[button_cmds, button_profile]])
 
     await context.bot.send_photo(
         chat_id=update.message.chat_id, 
         photo=open(photo_path, 'rb'), 
         caption=caption, 
         parse_mode='Markdown',
-        reply_markup=keyboard
+        # reply_markup=keyboard
     )
 # async def button_start(update: Update, context: ContextTypes):
 #     query = update.callback_query
@@ -530,7 +530,7 @@ async def me(update: Update, context: CallbackContext):
     else:
         profile_text = "No se encontraron datos para tu perfil."
 
-    photo_path = 'perudoxbot.jpg'  # Asegúrate de que la ruta sea correcta
+    photo_path = 'doxperubot.jpg'  # Asegúrate de que la ruta sea correcta
 
     # Envía la imagen junto con la descripción del perfil
     await context.bot.send_photo(
