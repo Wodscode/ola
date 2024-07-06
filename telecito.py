@@ -1322,8 +1322,6 @@ async def dniBasico(update: Update, context):
         return
     
     try:
-        dni = message_text.strip()
-
         result = dniBasicoTexto(dni)
 
         if result['success']:
