@@ -210,19 +210,19 @@ async def button_click(update: Update, context: CallbackContext):
                 "*[📍] RENIEC FICHA C4 AZUL [PREMIUM]*\n\n"
                 "*Estado* → Activo [🟢]\n"
                 "*Uso* → /c4a 00000001\n"
-                "*Consumo* → 15 créditos\n"
+                "*Consumo* → 4 créditos\n"
                 "*Desc* → Genera ficha C4 azul en PDF\n\n"
 
                 "*[📍] RENIEC FICHA C4 BLANCO [PREMIUM]*\n\n"
                 "*Estado* → Activo [🟢]\n"
                 "*Uso* → /c4b 00000001\n"
-                "*Consumo* → 15 créditos\n"
+                "*Consumo* → 4 créditos\n"
                 "*Desc* → Genera ficha C4 blanco en PDF\n"
 
                 "*[📍] RENIEC FICHA C4 INSCRIPCIÓN [PREMIUM]*\n\n"
                 "*Estado* → Activo [🟢]\n"
                 "*Uso* → /c4i 00000001\n"
-                "*Consumo* → 15 créditos\n"
+                "*Consumo* → 4 créditos\n"
                 "*Desc* → Genera ficha C4 inscripción en PDF\n\n"
 
                 "*[📍] RENIEC DNI VIRTUAL [PREMIUM]*\n\n"
