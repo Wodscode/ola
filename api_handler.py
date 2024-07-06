@@ -718,7 +718,7 @@ def consultar_papeletas_api(dni):
 
 def format_papeleta_message(papeleta):
     mensaje = (
-        f"*[#ThiKhaBot]* ➜ *PAPELETA*\n\n"
+        f"*[#PeruDox]* ➜ *PAPELETA*\n\n"
         f"*PLACA:* `{papeleta.get('placa', '')}`\n"
         f"*REGLAMENTO:* `{papeleta.get('reglamento', '')}`\n"
         f"*FALA:* `{papeleta.get('fala', '')}`\n"
