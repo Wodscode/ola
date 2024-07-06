@@ -2657,7 +2657,7 @@ async def c4a(update: Update, context: CallbackContext):
     if await verificar_mensualidad_activa(user_id):
         creditos = 0
     else:
-        creditos = 5
+        creditos = 4
         suficientes = verificar_creditos_suficientes(user_id, creditos)
 
         if not suficientes:
@@ -2712,7 +2712,7 @@ async def c4b(update: Update, context: CallbackContext):
     if await verificar_mensualidad_activa(user_id):
         creditos = 0
     else:
-        creditos = 5
+        creditos = 4
         suficientes = verificar_creditos_suficientes(user_id, creditos)
 
         if not suficientes:
@@ -2764,7 +2764,7 @@ async def c4i(update: Update, context: CallbackContext):
     if await verificar_mensualidad_activa(user_id):
         creditos = 0
     else:
-        creditos = 5
+        creditos = 4
         suficientes = verificar_creditos_suficientes(user_id, creditos)
 
         if not suficientes:
