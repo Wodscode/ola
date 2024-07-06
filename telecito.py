@@ -36,8 +36,8 @@ async def start(update: Update, context: ContextTypes):
     name = user.first_name
     caption = (
         f"*[#PeruDox]*\n\n"
-        f"[[📍]] *Bienvenido `{name}`*\n"
-        f"[[💻]] [{name}](tg://user?id={user_id}) - {user_id} \n\n"
+        f"[[📍]] *Bienvenido* `{name}`\n"
+        f"[[💻]] [{name}](tg://user?id={user_id}) - `{user_id}` \n\n"
 
         f"[[📝]] Para registrarte usa → /register\n"
         f"[[⚙️]] Para ver comandos usa → /cmds\n"
