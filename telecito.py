@@ -1166,7 +1166,6 @@ async def reniecCompleto(update: Update, context):
         return
     
     try:
-        dni = message_text.strip()
         result = consultar_reniec(dni)
         
         if result['success']:
