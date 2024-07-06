@@ -1361,16 +1361,16 @@ async def nombre(update: Update, context):
 
     parts = message_text[len('/nm'):].strip().split('|')
     
-    if len(parts) < 6:
+    if len(parts) != 3:
         await update.message.reply_text(
-            "Por favor proporciona los parámetros necesarios después del comando. Ejemplo: /nm LISMELI|ROMAINA|SILVA|36|34|HUANUCO"
+            "Por favor proporciona exactamente tres parámetros separados por '|'. Ejemplo: /nm LISMELI|ROMAINA|SILVA"
         )
         return
 
-    name, first_name, last_name, max_age, min_age, depa = [part.strip() for part in parts]
+    name, first_name, last_name = [part.strip().upper() for part in parts]
 
     try:
-        resultado = consultar_nombre(name, first_name, last_name, max_age, min_age, depa)
+        resultado = consultar_nombre(name, first_name, last_name)
 
         if resultado and 'listaAni' in resultado:
             personas = resultado['listaAni']
