@@ -868,9 +868,8 @@ async def verificar_mensualidad_activa(user_id):
         customer = customers_collection.find_one({'telegram_id': user_id})
 
         if customer:
-                return False  # Mensualidad expirada
-            else:
-                return False  # No hay fecha de fin de mensualidad definida
+            return False  # Mensualidad expirada
+            # No hay fecha de fin de mensualidad definida
         else:
             return False  # Usuario no encontrado en la base de datos
 
