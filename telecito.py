@@ -42,6 +42,7 @@ async def start(update: Update, context: ContextTypes):
         f"[[📝]] Para registrarte usa → /register\n"
         f"[[⚙️]] Para ver comandos usa → /cmds\n"
         f"[[🙎‍♂️]] Para ver tu perfil usa → /me\n"
+        f"[[👥]] Únete al grupo oficial → @PeruDox\n"
 
     )
     photo_path = 'doxperubot.jpg'
