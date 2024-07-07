@@ -115,13 +115,13 @@ async def button_click(update: Update, context: CallbackContext):
 
                 "*[📍] RENIEC ONLINE - 4 FOTO [PREMIUM]*\n\n"
                 "*Estado* → Activo [🟢]\n"
-                "*Uso* → /dnf 00000001\n"
+                "*Uso* → /dnif 00000001\n"
                 "*Consumo* → 3 créditos\n"
                 "*Desc* → Datos completos en texto e imágenes rostro, huellas y firma\n\n"
 
                 "*[📍] RENIEC ONLINE - TEXTO [FREE]*\n\n"
                 "*Estado* → Activo [🟢]\n"
-                "*Uso* → /dnx 00000001\n"
+                "*Uso* → /dnix 00000001\n"
                 "*Consumo* → 0 créditos\n"
                 "*Desc* → Datos básicos en texto\n\n"
 
