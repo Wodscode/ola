@@ -3771,7 +3771,9 @@ async def buy(update: Update, context: ContextTypes):
         f"*__• PREMIUM = 10'__*\n\n"
 
 
-        f"*__🎭 SELLERS OFICIALES 🎭__*\n"
+        f"*__🎭 SELLERS OFICIALES 🎭__*\n\n"
+        f"*__🎭 @monitosgg 🎭__*\n"
+        f"*__🎭 @MrWeeD42OL 🎭__*\n"
     )
     await context.bot.send_message(chat_id=update.message.chat_id, text=caption, parse_mode='Markdown')
 
