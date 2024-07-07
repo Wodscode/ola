@@ -868,6 +868,22 @@ async def verificar_mensualidad_activa(user_id):
         customer = customers_collection.find_one({'telegram_id': user_id})
 
         if customer:
+                return False  # Mensualidad expirada
+            else:
+                return False  # No hay fecha de fin de mensualidad definida
+        else:
+            return False  # Usuario no encontrado en la base de datos
+
+    except Exception as e:
+        print(f"Error al verificar mensualidad activa: {str(e)}")
+        return False
+
+async def veveverificar_mensualidad_activa(user_id):
+    try:
+        # Obtener los datos del usuario desde la base de datos
+        customer = customers_collection.find_one({'telegram_id': user_id})
+
+        if customer:
             end_date_str = customer.get('end_date')
             if end_date_str:
                 end_date = datetime.datetime.strptime(end_date_str, '%Y-%m-%d %H:%M:%S')
