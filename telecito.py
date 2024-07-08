@@ -470,7 +470,7 @@ def register_user(telegram_id, name):
         "Authorization": AUTH_TOKEN,
         "Content-Type": "application/json"
     }
-    API_URL = "http://127.0.0.1:5000/register_customer"
+    API_URL = "http://127.0.0.1:80/register_customer"
 
     response = requests.post(API_URL, json=payload, headers=headers)
     return response.json()
@@ -655,7 +655,7 @@ async def add_cred(update: Update, context: CallbackContext):
             'amount': amount
         }
 
-        API_URL = "http://127.0.0.1:5000/add_credits"
+        API_URL = "http://127.0.0.1:80/add_credits"
         headers = {
             'Authorization': AUTH_TOKEN,
             'Content-Type': 'application/json'
@@ -715,7 +715,7 @@ async def more_cred(update: Update, context: CallbackContext):
             'amount': amount
         }
 
-        API_URL = "http://127.0.0.1:5000/more_credits"
+        API_URL = "http://127.0.0.1:80/more_credits"
         headers = {
             'Authorization': AUTH_TOKEN,
             'Content-Type': 'application/json'
@@ -769,7 +769,7 @@ async def add_days(update: Update, context: CallbackContext):
             await update.message.reply_text(f"No se pudo obtener el username para el ID {user_id}.")
             return
 
-        API_URL = "http://127.0.0.1:5000/add_days"
+        API_URL = "http://127.0.0.1:80/add_days"
         headers = {
             'Authorization': AUTH_TOKEN,
             'Content-Type': 'application/json'
@@ -829,7 +829,7 @@ async def more_days(update: Update, context: CallbackContext):
             await update.message.reply_text(f"No se pudo obtener el username para el ID {user_id}.")
             return
 
-        API_URL = "http://127.0.0.1:5000/more_days"
+        API_URL = "http://127.0.0.1:80/more_days"
         headers = {
             'Authorization': AUTH_TOKEN,
             'Content-Type': 'application/json'
@@ -926,7 +926,7 @@ async def consumo_creditos(update: Update, context: CallbackContext, user_id: in
             'user_id': user_id,
             'amount': amount
         }
-        API_URL = "http://127.0.0.1:5000/rest_credits"
+        API_URL = "http://127.0.0.1:80/rest_credits"
         headers = {
             'Authorization': AUTH_TOKEN,
             'Content-Type': 'application/json'
@@ -966,7 +966,7 @@ async def antepam(update: Update, context: CallbackContext) -> bool:
         return False
 
 async def update_last_query_time(user_id: int):
-    API_URL = "http://127.0.0.1:5000/update_last_query_time"
+    API_URL = "http://127.0.0.1:80/update_last_query_time"
     headers = {
         'Authorization': AUTH_TOKEN,
         'Content-Type': 'application/json'
@@ -982,7 +982,7 @@ async def update_last_query_time(user_id: int):
         print(f"Error: {e}")
 
 async def increment_queries(user_id: int):
-    API_URL = "http://127.0.0.1:5000/increment_queries"
+    API_URL = "http://127.0.0.1:80/increment_queries"
     headers = {
         'Authorization': AUTH_TOKEN,
         'Content-Type': 'application/json'
@@ -1024,7 +1024,7 @@ async def add_seller(update: Update, context: CallbackContext):
             'telegram_id': user_id,
         }
 
-        API_URL = "http://127.0.0.1:5000/add_seller"
+        API_URL = "http://127.0.0.1:80/add_seller"
         headers = {
             'Authorization': AUTH_TOKEN,
             'Content-Type': 'application/json'
@@ -1078,7 +1078,7 @@ async def remove_seller(update: Update, context: CallbackContext):
             'telegram_id': user_id,
         }
 
-        API_URL = "http://127.0.0.1:5000/rem_seller"
+        API_URL = "http://127.0.0.1:80/rem_seller"
         headers = {
             'Authorization': AUTH_TOKEN,
             'Content-Type': 'application/json'
@@ -1132,7 +1132,7 @@ async def anti_spam(update: Update, context: CallbackContext):
             'amount': amount
         }
 
-        API_URL = "http://127.0.0.1:5000/anti_spam"
+        API_URL = "http://127.0.0.1:80/anti_spam"
         headers = {
             'Authorization': AUTH_TOKEN,
             'Content-Type': 'application/json'
