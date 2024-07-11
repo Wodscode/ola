@@ -1400,16 +1400,17 @@ async def nombre(update: Update, context):
                 mensaje = "No se encontró ninguna persona con los criterios proporcionados."
                 await update.message.reply_text(mensaje)
                 return
-
+            mensaje = (
+                f"*[#PeruDox]* ➜ *CONSULTA POR NOMBRE*\n\n"
+            )
             for persona in personas:
-                mensaje = (
-                    f"*[#PeruDox]* ➜ *CONSULTA POR NOMBRE*\n\n"
+                mensaje += (
                     f"*DNI:* `{persona.get('nuDni', '')}`\n"
                     f"*Nombres:* `{persona.get('preNombres', '')} {persona.get('apePaterno', '')} {persona.get('apeMaterno', '')}`\n"
                     f"*Sexo:* `{persona.get('sexo', '')}`\n"
-                    f"*Edad:* `{persona.get('nuEdad', '')}`\n"
+                    f"*Edad:* `{persona.get('nuEdad', '')}`\n\n"
                 )
-                await update.message.reply_text(mensaje, parse_mode='Markdown')
+            await update.message.reply_text(mensaje, parse_mode='Markdown')
             await increment_queries(user_id)
         else:
             mensaje = "No se encontraron resultados para la consulta por nombre."
